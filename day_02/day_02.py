@@ -1,39 +1,49 @@
-
-
 lines = open("day_02/input.txt").readlines()
 
-moveDict = {
-    'A, X': 0, #ROCK V ROCK
-    'A, Y': 3, #ROCK V PAPER
-    'A, Z': 0, #ROCK V SCISSORS 
-    'B, X': 0, #PAPER V ROCK
-    'B, Y': 3, #PAPER
-    'B, Z': 6, #PAPER
-    'C, X': 3, #SCISSORS V ROCK
-    'C, Y': 3, #SCISSORS
-    'C, Z': 3, #SCISSORS
+move_score = {
+    'X' : 1, 
+    'Y' : 2,
+    'Z' : 3,
 }
 
-def isWin(moves):
-    score = moveDict[moves[0]] - moveDict[moves[1]] 
-    
-    if score == 2: #won
-        return 6
-    if score == 1: #lost
-        return 0
-    return 3 #return draw
- 
-    
+outcome_score = {
+    'AZ': 0, #ROCK V SCISSORS
+    'BX': 0, #PAPER V ROCK
+    'CY': 0, #SCISSORS V PAPER
+    'AX': 3, #ROCK V ROCK
+    'BY': 3, #PAPER V PAPER
+    'CZ': 3, #SCISSORS V SCISSORS
+    'AY': 6, #ROCK V PAPER
+    'BZ': 6, #PAPER V SCISSORS
+    'CX': 6, #SCISSORS V ROCK
+}
+
+translated_move = {
+    'AX': 'AZ',  
+    'BX': 'BX', 
+    'CX': 'CY',  
+    'AY': 'AX',  
+    'BY': 'BY',  
+    'CY': 'CZ',  
+    'AZ': 'AY',  
+    'BZ': 'BZ', 
+    'CZ': 'CX', 
+}
+
 def part1(lines):
     score = 0
     for line in lines:
         moves = line.strip("\n").split(" ")
-        score += isWin(moves)
+        score += outcome_score[f"{moves[0]}{moves[1]}"] + move_score[moves[1]]
     return score
 
 def part2(lines):
-    return f"{lines} \ncoming soon!"
-
+    score = 0
+    for line in lines:
+        moves = line.strip("\n").split(" ")
+        real_move = translated_move[f"{moves[0]}{moves[1]}"]
+        score += outcome_score[real_move] + move_score[real_move[1]]
+    return score
 
 print(f"\n{part1(lines)=} \
         \n{part2(lines)=}\n")  # formatted print
