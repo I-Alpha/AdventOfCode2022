@@ -1,3 +1,5 @@
 .history
 *.zip
-*.py.lprof
+*.lprof
+tempCodeRunnerFile.py
+__pycache__
