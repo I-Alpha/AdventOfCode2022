@@ -13,7 +13,7 @@ def get_elves_calories_dict(lines):
             elves[j] += int(line.strip("\n"))    # increment value of dict entry j by current line value,
                                                  # thereby computing current sum for current elf j
                                                  
-    return elves                   #return dict 
+    return elves          
 
 def part1(lines):
     """
