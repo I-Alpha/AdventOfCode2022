@@ -12,7 +12,6 @@ def create_initial_stacks(stackArray):
     stackGroups = {i: [] for i in range(1, stackCount+1)}
     for stack in stackArray[:-1]:
         col = 1
-        x = 0 if stack[0] == " " else 1
         for i in range(1, number_of_characters, 4):
             if stack[i] != " ":
                 stackGroups[col].append(stack[i])
