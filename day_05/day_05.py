@@ -6,7 +6,7 @@ newLineIndx = lines.index("")
 startingStack = lines[0:newLineIndx]
 instructions = lines[newLineIndx+1:]
 
-def create_initial_stack(stackArray):
+def create_initial_stacks(stackArray):
     stackCount = int(max(list(stackArray[-1])))
     number_of_characters = len(list(stackArray[-1]))
     stackGroups = {i: [] for i in range(1, stackCount+1)}
@@ -61,12 +61,12 @@ def get_crate_code(stackGroups):
     return "".join(list(map(lambda x: x[-1], list(stackGroups.values()))))
 
 def part1():
-    stackGroups = create_initial_stack(startingStack)
+    stackGroups = create_initial_stacks(startingStack)
     stackGroups = apply_instructions(instructions, stackGroups)
     return get_crate_code(stackGroups)
 
 def part2():
-    stackGroups = create_initial_stack(startingStack)
+    stackGroups = create_initial_stacks(startingStack)
     stackGroups = apply_instructions_part2(instructions, stackGroups)
     return get_crate_code(stackGroups)
 
